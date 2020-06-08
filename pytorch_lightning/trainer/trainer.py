@@ -879,6 +879,9 @@ class Trainer(
                 self.model = model
                 mp.spawn(self.ddp_train, nprocs=self.num_processes, args=(model,))
 
+            elif self.distributed_backend == 'ddp_spawn':
+                self.spawn_ddp_children(model)
+
             elif self.distributed_backend == 'ddp':
                 self.spawn_ddp_children(model)
 
